@@ -20,14 +20,14 @@ public class SplashActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
-		Animation animation = new AlphaAnimation(0, 1);
-		ImageView imageView = (ImageView) findViewById(R.id.iv_splash);
-		imageView.setAnimation(animation);
 		new Handler().postDelayed(new Runnable() {
-			
+			private ImageView imageView = (ImageView) findViewById(R.id.iv_splash);
 			@Override
 			public void run() {
 				Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+				Animation animation = new AlphaAnimation(1, 0);
+				animation.setDuration(1000);
+				imageView.startAnimation(animation);
 				startActivity(intent);
 				SplashActivity.this.finish();
 			}
