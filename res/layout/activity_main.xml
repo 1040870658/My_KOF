@@ -1,0 +1,29 @@
+<android.support.v4.app.FragmentTabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@android:id/tabhost"
+     >
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <FrameLayout 
+            android:id="@android:id/tabcontent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+         >
+        </FrameLayout>
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D1D1D1"/>
+        <TabWidget 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@android:id/tabs">
+        </TabWidget>
+    </LinearLayout>
+</android.support.v4.app.FragmentTabHost>

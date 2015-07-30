@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">KOF</string>
+    <string name="fake_name">懂球帝</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+	<string name="fragment_tag_1">tag_1</string>
+	<string name="fragment_tag_2">tag_2</string>
+	<string name="fragment_tag_3">tag_3</string>
+	<string name="fragment_tag_4">tag_4</string>
+	<string name="fragment_tag_5">tag_5</string>
+	<string name="tab_main">首页</string>
+	<string name="tab_match">比赛</string>
+	<string name="tab_group">圈子</string>
+	<string name="tab_data">数据</string>
+	<string name="sub_main_tab1">头条</string>
+	<string name="sub_main_tab2">视频</string>
+	<string name="sub_main_tab3">集锦</string>
+	<string name="sub_main_tab4">深度</string>
+	<string name="sub_main_tab5">足彩</string>
+	<string name="sub_main_tab6">专题</string>
+	<string name="sub_main_tab7">闲情</string>
+	<string name="sub_main_tab8">转会</string>
+	<string name="sub_main_tab9">国内</string>
+	<string name="sub_main_tab10">英超</string>
+	<string name="sub_main_tab11">西甲</string>
+	<string name="sub_main_tab12">德甲</string>
+	<string name="sub_main_tab13">意甲</string>
+	<string name="sub_main_tab14">其他</string>
+</resources>
