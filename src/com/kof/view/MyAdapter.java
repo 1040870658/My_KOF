@@ -19,7 +19,7 @@ public abstract class MyAdapter extends BaseAdapter {
 	View layoutView;
 	Activity activity;
 	int resid;
-	private HolderFactory holderFactory;
+	protected HolderFactory holderFactory;
 	protected abstract View setUpConvertView();
 	public MyAdapter(Holder holder,Activity activity) {
 		this.holder = holder;

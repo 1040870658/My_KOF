@@ -44,6 +44,7 @@ public abstract class SubFragmentMain extends Fragment{
 		// TODO Auto-generated method stub
 		fatherActivity =getActivity();
 		this.holder = setUpDataHolder();
+		//adapter = new SubMainAdapter(holder, fatherActivity);
 		setUpPullToRefresh(layout);
 		super.onActivityCreated(savedInstanceState);
 	}
@@ -95,7 +96,6 @@ public abstract class SubFragmentMain extends Fragment{
 			}
 		});
 //		adapter = new SubMainAdapter(new SubMainHolder(fatherActivity), fatherActivity, R.layout.item_list);
-		adapter = new SubMainAdapter(holder, fatherActivity);
 		ListView actualListView = mPullToRefreshListView.getRefreshableView();
 		actualListView.setAdapter(adapter);
 	}
