@@ -28,4 +28,5 @@
 	<string name="sub_main_tab12">德甲</string>
 	<string name="sub_main_tab13">意甲</string>
 	<string name="sub_main_tab14">其他</string>
+	<string name="update_date">update_date</string>
 </resources>

@@ -1,10 +1,11 @@
 package com.kof.activity;
 
 import com.example.kof.R;
-import com.kof.utils.GlobalData;
+import com.kof.model.GlobalData;
+import com.kof.utils.SplashDialog;
 
-import android.R.anim;
-import android.app.Activity;
+
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
@@ -12,12 +13,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
+
 
 
 public class MainActivity extends FragmentActivity {
 
 	private FragmentTabHost mTabHost;
+	private Dialog splashDialog ;
 	
 	private void initTabHost(){
 		mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
@@ -51,6 +53,8 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        splashDialog = new SplashDialog(this, R.style.mydialog);
+        splashDialog.show();
         setTitleStyle();
         setContentView(R.layout.activity_main);
         initTabHost();

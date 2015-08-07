@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical" >
-    
-	<TextView 
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:textSize="25sp"
-	    android:text="@string/sub_main_tab1"/>
+
+    <!-- The PullToRefreshListView replaces a standard ListView widget. -->
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pull_refresh_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:smoothScrollbar="true" 
+        ptr:ptrDrawable="@drawable/default_ptr_flip"  
+        ptr:ptrAnimationStyle="flip" >
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
 </LinearLayout>

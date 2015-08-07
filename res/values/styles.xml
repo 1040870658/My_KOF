@@ -27,4 +27,9 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">20sp</item>
     </style>
+    
+   <style name="mydialog" parent="@android:style/Theme.Dialog">       
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/splash</item>
+	</style>
 </resources>
