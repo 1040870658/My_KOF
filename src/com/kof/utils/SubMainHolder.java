@@ -13,7 +13,8 @@ import com.kof.model.GlobalData;
 import com.kof.model.SubMainDataHolder;
 
 public class SubMainHolder implements Holder{
-
+	private int Tag = GlobalData.TEXT_TYPE;
+	private int resid;
 	public TextView headTextView;
 	public TextView summaryTextView;
 	public ImageView imageView;
@@ -22,12 +23,13 @@ public class SubMainHolder implements Holder{
 	private List<String> mListItems;
 	private List<String> sListItems;
 	private int[] iListItems;
-	public SubMainHolder(Context context){
+	public SubMainHolder(Context context,int resid){
 		this.context = context;
 		subMainDataHolder = new SubMainDataHolder();
 		mListItems = subMainDataHolder.getTitleSet();
 		sListItems = subMainDataHolder.getSummarySet();
 	    iListItems = subMainDataHolder.getImgSet();
+	    this.resid = resid;
 	}
 	@Override
 	public void setUp(View convertView) {
@@ -57,4 +59,11 @@ public class SubMainHolder implements Holder{
 		return mListItems.size();
 	}
 
+	public int getTag(){
+		return Tag;
+	}
+	
+	public int getResid(){
+		return resid;
+	}
 }

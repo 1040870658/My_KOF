@@ -12,8 +12,8 @@ import com.kof.utils.Holder;
 
 public class SubMainAdapter extends MyAdapter{
 
-	public SubMainAdapter(Holder holder, Activity activity, int resid) {
-		super(holder, activity, resid);
+	public SubMainAdapter(Holder holder, Activity activity) {
+		super(holder, activity);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -6,4 +6,6 @@ public interface Holder {
 	void setUp(View convertView);
 	void refreshData(int position);
 	int getLength();
+	int getResid();
+	int getTag();
 }

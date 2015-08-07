@@ -4,4 +4,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 	<dimen name="tab_size">12dp</dimen>
+	<dimen name="padding_left">8dp</dimen>
+	<dimen name="comment_text_size">9sp</dimen>
+	<dimen name="head_text_size">15sp</dimen>
+	<dimen name="summary_text_size">13sp</dimen>
 </resources>

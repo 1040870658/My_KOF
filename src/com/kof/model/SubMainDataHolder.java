@@ -8,6 +8,7 @@ import java.util.List;
 import com.example.kof.R;
 
 public class SubMainDataHolder {
+	
 	private String[] mStrings = { "Abbaye de Belloc",
 			"Abbaye du Mont des Cats", "Abertam", "Abondance", "Ackawi",
 			"Acorn"};
@@ -32,4 +33,5 @@ public class SubMainDataHolder {
 	public int[] getImgSet(){
 		return imgId;
 	}
+	
 }

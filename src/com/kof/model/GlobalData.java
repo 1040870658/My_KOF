@@ -14,12 +14,17 @@ import com.kof.fragment.FragmentData;
 import com.kof.fragment.FragmentGroup;
 import com.kof.fragment.FragmentMain;
 import com.kof.fragment.FragmentMatch;
+import com.kof.subfragment.SubFragmentFA;
 import com.kof.subfragment.SubFragmentMain;
+import com.kof.subfragment.SubFragmentMainHotnews;
 public class GlobalData {
 	private GlobalData(){
 	}
 	private static DisplayMetrics displayMetrics;
 	public static int DISPLAY_NUM = 5;
+	public static int TEXT_TYPE = 0;
+	public static int IMAGE_TYPE = 1;
+	public static int currentType = TEXT_TYPE;
 	private static final int NUM = 4;
 	public static int num_of_fragments = NUM;
 	
@@ -72,7 +77,7 @@ public class GlobalData {
 	private static List<Fragment> fragments = new ArrayList<Fragment>();
 	public static List<Fragment> getFragments(){
 		for(int i = 0;i < sub_main_num;i++){
-			fragments.add(new SubFragmentMain());
+			fragments.add(new SubFragmentMainHotnews());
 		}
 		return fragments;
 	}

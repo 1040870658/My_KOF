@@ -7,9 +7,12 @@ import com.example.kof.R;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.kof.model.SubMainImageDataHolder;
 import com.kof.net.LoadingTask;
 import com.kof.utils.DateManager;
+import com.kof.utils.Holder;
 import com.kof.utils.SubMainHolder;
+import com.kof.utils.SubMainImageHolder;
 import com.kof.view.MyAdapter;
 import com.kof.view.SubMainAdapter;
 
@@ -18,6 +21,7 @@ import android.R.raw;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -26,27 +30,31 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class SubFragmentMain extends Fragment{
+public abstract class SubFragmentMain extends Fragment{
 
-	private PullToRefreshListView mPullToRefreshListView;
-	private DateManager dateManager;
-	private Activity fatherActivity;
-	private MyAdapter adapter;
+	protected PullToRefreshListView mPullToRefreshListView;
+	protected DateManager dateManager;
+	protected Activity fatherActivity;
+	protected MyAdapter adapter;
+	protected Holder holder;
+	protected View layout;
+	
+	@Override
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		fatherActivity =getActivity();
+		this.holder = setUpDataHolder();
+		setUpPullToRefresh(layout);
+		super.onActivityCreated(savedInstanceState);
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		fatherActivity =getActivity();
-		View layout = inflater.inflate(R.layout.sub_fragment_main, null);
-		
-		mPullToRefreshListView = (PullToRefreshListView) layout.findViewById(R.id.pull_refresh_list);
-		setUpPullToRefresh();
-		adapter = new SubMainAdapter(new SubMainHolder(fatherActivity), fatherActivity, R.layout.item_list);
-		ListView actualListView = mPullToRefreshListView.getRefreshableView();
-		actualListView.setAdapter(adapter);
+		layout = inflater.inflate(R.layout.sub_fragment_main, null);
 		return layout;
 	}
-	private String generateUpdateLabel(){
+	protected String generateUpdateLabel(){
 		SharedPreferences sharedPreferences = fatherActivity.getPreferences(fatherActivity.MODE_PRIVATE);
 		dateManager = new DateManager(new Date(System.currentTimeMillis()), "MM月dd日 HH:mm");
 		String lastDateString = dateManager.getFromshare(sharedPreferences, 
@@ -72,7 +80,8 @@ public class SubFragmentMain extends Fragment{
 		return updateLabel;
 	}
 	
-	private void setUpPullToRefresh(){
+	protected void setUpPullToRefresh(View layout){
+		mPullToRefreshListView = (PullToRefreshListView) layout.findViewById(R.id.pull_refresh_list);
 		mPullToRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(generateUpdateLabel());
 		mPullToRefreshListView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
 		mPullToRefreshListView.getLoadingLayoutProxy().setReleaseLabel("松开立即刷新");
@@ -85,6 +94,10 @@ public class SubFragmentMain extends Fragment{
 				new LoadingTask(mPullToRefreshListView).execute();
 			}
 		});
+//		adapter = new SubMainAdapter(new SubMainHolder(fatherActivity), fatherActivity, R.layout.item_list);
+		adapter = new SubMainAdapter(holder, fatherActivity);
+		ListView actualListView = mPullToRefreshListView.getRefreshableView();
+		actualListView.setAdapter(adapter);
 	}
-	
+	protected abstract Holder setUpDataHolder();
 }

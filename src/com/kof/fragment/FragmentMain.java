@@ -7,7 +7,9 @@ import java.util.concurrent.CountDownLatch;
 
 import com.example.kof.*;
 import com.kof.model.GlobalData;
+import com.kof.subfragment.SubFragmentFA;
 import com.kof.subfragment.SubFragmentMain;
+import com.kof.subfragment.SubFragmentMainHotnews;
 import com.kof.utils.FragmentViewPageAdapter;
 
 import android.R.integer;
@@ -76,7 +78,7 @@ public class FragmentMain extends Fragment{
 			View indicatorView ;
 			indicatorView = getIndicatorView(i);
 			((TextView)indicatorView.findViewById(R.id.sub_text)).setText(GlobalData.subMain[i]);
-			mTabHost.addTab(mTabHost.newTabSpec("sub_main_tab"+i).setIndicator(indicatorView), SubFragmentMain.class, null);
+			mTabHost.addTab(mTabHost.newTabSpec("sub_main_tab"+i).setIndicator(indicatorView), SubFragmentMainHotnews.class, null);
 		}
 		 
 	                
