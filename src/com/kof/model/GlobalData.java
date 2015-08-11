@@ -84,9 +84,9 @@ public class GlobalData {
 	
 	private static String[] mStrings = { "Abbaye de Belloc",
 			"Abbaye du Mont des Cats", "Abertam", "Abondance", "Ackawi",
-			"Acorn" };
+			"Acorn","曼城3-0西布朗，亚亚图雷梅开二度" };
 	private static int[] imgId = { R.drawable.news_1, R.drawable.news_2,
 			R.drawable.news_3, R.drawable.news_4, R.drawable.news_5,
-			R.drawable.news_6 };
+			R.drawable.news_6 ,R.drawable.news_7};
 
 }

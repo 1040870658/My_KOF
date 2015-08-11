@@ -11,10 +11,10 @@ public class SubMainDataHolder {
 	
 	private String[] mStrings = { "Abbaye de Belloc",
 			"Abbaye du Mont des Cats", "Abertam", "Abondance", "Ackawi",
-			"Acorn"};
+			"Acorn","曼城3-0西布朗，亚亚图雷梅开二度"};
 	private int[] imgId = { R.drawable.news_1, R.drawable.news_2,
 			R.drawable.news_3, R.drawable.news_4, R.drawable.news_5,
-			R.drawable.news_6 };
+			R.drawable.news_6,R.drawable.news_7 };
 	private List<String> mListItems;
 	private List<String> sListItems;
 	
@@ -33,5 +33,7 @@ public class SubMainDataHolder {
 	public int[] getImgSet(){
 		return imgId;
 	}
-	
+	public int getLength(){
+		return mListItems.size();
+	}
 }

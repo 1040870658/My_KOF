@@ -7,35 +7,28 @@ import com.example.kof.R;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.kof.model.SubMainImageDataHolder;
 import com.kof.net.LoadingTask;
 import com.kof.utils.DateManager;
 import com.kof.utils.Holder;
-import com.kof.utils.SubMainHolder;
-import com.kof.utils.SubMainImageHolder;
-import com.kof.view.MyAdapter;
 import com.kof.view.SubMainAdapter;
 
 
-import android.R.raw;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public abstract class SubFragmentMain extends Fragment{
 
 	protected PullToRefreshListView mPullToRefreshListView;
 	protected DateManager dateManager;
 	protected Activity fatherActivity;
-	protected MyAdapter adapter;
+	protected SubMainAdapter adapter;
 	protected Holder holder;
 	protected View layout;
 	
@@ -44,7 +37,7 @@ public abstract class SubFragmentMain extends Fragment{
 		// TODO Auto-generated method stub
 		fatherActivity =getActivity();
 		this.holder = setUpDataHolder();
-		//adapter = new SubMainAdapter(holder, fatherActivity);
+//		adapter = new SubMainAdapter(holder, fatherActivity);
 		setUpPullToRefresh(layout);
 		super.onActivityCreated(savedInstanceState);
 	}

@@ -3,6 +3,7 @@ package com.kof.utils;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -38,7 +39,7 @@ public class SubMainHolder implements Holder{
 		summaryTextView = (TextView) convertView.findViewById(R.id.tv_summary);
 		imageView = (ImageView) convertView.findViewById(R.id.iv_title);
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-				GlobalData.getScreenWidth(context)/4,
+				GlobalData.getScreenWidth(context)/3,
 				GlobalData.getScreenHeight(context)/8);
 		params.addRule(RelativeLayout.CENTER_VERTICAL);
 		imageView.setLayoutParams(params);
@@ -51,8 +52,16 @@ public class SubMainHolder implements Holder{
 		headTextView.setText(mListItems.get(position));
 		summaryTextView.setText(sListItems.get(position));
 		imageView.setImageResource(iListItems[position]);
+		
 	}
 
+	public void clear(){
+		imageView.setImageDrawable(null);
+	}
+	
+	public Object getImageTag(){
+		return imageView.getTag();
+	}
 	@Override
 	public int getLength() {
 		// TODO Auto-generated method stub

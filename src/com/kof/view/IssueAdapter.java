@@ -2,7 +2,10 @@ package com.kof.view;
 
 import java.util.ArrayList;
 
+import android.database.DataSetObserver;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -18,7 +21,6 @@ public class IssueAdapter extends PagerAdapter{
 
     @Override
     public int getCount() {
-        //设置成最大，使用户看不到边界
         return viewlist.size();
     }
 
@@ -29,24 +31,29 @@ public class IssueAdapter extends PagerAdapter{
      @Override  
      public void destroyItem(ViewGroup container, int position,  
              Object object) {  
-         //Warning：不要在这里调用removeView
      }  
      @Override  
      public Object instantiateItem(ViewGroup container, int position) {
          //对ViewPager页号求模取出View列表中要显示的项
-         position %= viewlist.size();
-         if (position<0){
-             position = viewlist.size()+position;
-         }
-         ImageView view = viewlist.get(position);
-         //如果View已经在之前添加到了一个父组件，则必须先remove，否则会抛出IllegalStateException。
-         ViewParent vp =view.getParent();
-         if (vp!=null){
-             ViewGroup parent = (ViewGroup)vp;
-             parent.removeView(view);
-         }
-         container.addView(view);  
-         //add listeners here if necessary
-         return view;  
-     }  
+    	 ViewGroup group = (ViewGroup) viewlist.get(position).getParent();
+			if (group != null) {
+				group.removeView(viewlist.get(position));
+			}
+			((ViewPager) container).addView(viewlist.get(position));
+			return viewlist.get(position);
+     }
+
+	@Override
+	public void unregisterDataSetObserver(DataSetObserver observer) {
+		// TODO Auto-generated method stub
+		if(observer != null)
+			super.unregisterDataSetObserver(observer);
+	}
+
+	@Override
+	public int getItemPosition(Object object) {
+		// TODO Auto-generated method stub
+		return POSITION_NONE;
+	}  
+     
 }
