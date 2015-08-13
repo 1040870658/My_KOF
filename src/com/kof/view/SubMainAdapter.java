@@ -21,15 +21,18 @@ import com.example.kof.R;
 import com.kof.model.GlobalData;
 import com.kof.model.SubMainDataHolder;
 import com.kof.utils.Holder;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class SubMainAdapter extends BaseAdapter {
 
+	protected ImageLoader auto_imageLoader;
 	protected SubMainDataHolder dataHolder = new SubMainDataHolder();
 	protected Activity activity;
 
 	public SubMainAdapter(Activity activity) {
 		// TODO Auto-generated constructor stub
 		this.activity = activity;
+		auto_imageLoader =  ImageLoader.getInstance();
 	}
 
 	@Override
@@ -94,8 +97,10 @@ public class SubMainAdapter extends BaseAdapter {
 
 	public void refreshData(SubMainHolder holder, int position) {
 		// TODO Auto-generated method stub
-		AsynImageLoader imageLoader = new AsynImageLoader(holder);
-		imageLoader.execute(dataHolder.getImgSet()[position]);
+//		AsynImageLoader imageLoader = new AsynImageLoader(holder);
+//		imageLoader.execute(dataHolder.getImgSet()[position]);
+		String imageUrl = "drawable://"+dataHolder.getImgSet()[position];
+		auto_imageLoader.displayImage(imageUrl, holder.imageView);
 		holder.headTextView.setText(dataHolder.getTitleSet().get(position));
 		holder.summaryTextView
 				.setText(dataHolder.getSummarySet().get(position));

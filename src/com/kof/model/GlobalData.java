@@ -21,6 +21,7 @@ public class GlobalData {
 	private GlobalData(){
 	}
 	private static DisplayMetrics displayMetrics;
+	public static int DISPLAY_PAGER = 999;
 	public static int DISPLAY_NUM = 5;
 	public static int TEXT_TYPE = 0;
 	public static int IMAGE_TYPE = 1;

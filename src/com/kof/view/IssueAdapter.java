@@ -13,9 +13,9 @@ import android.widget.ImageView;
 
 public class IssueAdapter extends PagerAdapter{
     
-    private ArrayList<ImageView> viewlist;
+    private ArrayList<View> viewlist;
 
-    public IssueAdapter(ArrayList<ImageView> viewlist) {
+    public IssueAdapter(ArrayList<View> viewlist) {
         this.viewlist = viewlist;
     }
 
