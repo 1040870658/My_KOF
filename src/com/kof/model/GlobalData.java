@@ -77,6 +77,9 @@ public class GlobalData {
 	
 	private static List<Fragment> fragments = new ArrayList<Fragment>();
 	public static List<Fragment> getFragments(){
+		fragments.add(new SubFragmentMainHotnews());
+		fragments.add(new SubFragmentMainHotnews());
+		fragments.add(new SubFragmentMainHotnews());
 		for(int i = 0;i < sub_main_num;i++){
 			fragments.add(new SubFragmentMainHotnews());
 		}

@@ -14,10 +14,10 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-        <item name="android:actionBarStyle">@style/MyactionBarStyle</item>
+     <!--    <item name="android:actionBarStyle">@style/MyactionBarStyle</item> -->
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-
+<!-- 
     <style name="MyactionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
         <item name="android:titleTextStyle">@style/MytitleTextStyle</item>
         <item name="android:background">@color/green</item>
@@ -27,9 +27,10 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">20sp</item>
     </style>
-    
+    -->
    <style name="mydialog" parent="@android:style/Theme.Dialog">       
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/splash</item>
 	</style>
+	
 </resources>

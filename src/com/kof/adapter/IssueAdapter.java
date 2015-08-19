@@ -1,4 +1,4 @@
-package com.kof.view;
+package com.kof.adapter;
 
 import java.util.ArrayList;
 

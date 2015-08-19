@@ -11,10 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.kof.R;
+import com.kof.adapter.SubMainHotnewsAdapter;
 import com.kof.model.GlobalData;
 import com.kof.utils.Holder;
 import com.kof.utils.SubMainHolder;
-import com.kof.view.SubMainHotnewsAdapter;
 
 public class SubFragmentMainHotnews extends SubFragmentMain {
 
@@ -22,8 +22,14 @@ public class SubFragmentMainHotnews extends SubFragmentMain {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		layout = inflater.inflate(R.layout.sub_fragment_main, null);
-		adapter = new SubMainHotnewsAdapter(getActivity());
+		if(layout == null){
+			layout = inflater.inflate(R.layout.sub_fragment_main, null);
+			adapter = new SubMainHotnewsAdapter(getActivity());
+		}
+		ViewGroup parent = (ViewGroup) layout.getParent();
+		if(parent != null){
+			parent.removeView(layout);
+		}
 		return layout;
 	}
 

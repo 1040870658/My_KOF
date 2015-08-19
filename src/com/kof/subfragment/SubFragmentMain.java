@@ -7,10 +7,10 @@ import com.example.kof.R;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.kof.adapter.SubMainAdapter;
 import com.kof.net.LoadingTask;
 import com.kof.utils.DateManager;
 import com.kof.utils.Holder;
-import com.kof.view.SubMainAdapter;
 
 
 import android.app.Activity;
@@ -45,7 +45,13 @@ public abstract class SubFragmentMain extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		layout = inflater.inflate(R.layout.sub_fragment_main, null);
+		if(layout == null){
+			layout = inflater.inflate(R.layout.sub_fragment_main, null);
+		}
+		 ViewGroup parent = (ViewGroup) layout.getParent();  
+		 if(parent!=null){
+			 parent.removeView(layout);
+		 }
 		return layout;
 	}
 	protected String generateUpdateLabel(){

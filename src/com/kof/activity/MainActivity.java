@@ -1,25 +1,39 @@
 package com.kof.activity;
 
+import java.util.ArrayList;
+
 import com.example.kof.R;
+import com.kof.adapter.TextSettingAdapter;
 import com.kof.model.GlobalData;
 import com.kof.utils.SplashDialog;
 
 
 import android.app.Dialog;
+import android.content.res.Resources.Theme;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-
+import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
 
 public class MainActivity extends FragmentActivity {
-
+	private DrawerLayout drawerLayout;
+	private RelativeLayout drawerSettings;
 	private FragmentTabHost mTabHost;
 	private Dialog splashDialog ;
+	private ArrayAdapter<String> arrayAdapter;
+	private ArrayList<String>individual_items;
+	private ActionBarDrawerToggle drawerbar;
+	private TextSettingAdapter textSettingAdapter;
 	
 	private void initTabHost(){
 		mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
@@ -43,6 +57,19 @@ public class MainActivity extends FragmentActivity {
 	
 	
 	private void initView(){
+		individual_items = new ArrayList<String>();
+		individual_items.add("关于");
+		individual_items.add("意见反馈");
+		individual_items.add("推荐给好友");
+		individual_items.add("给我们评分 ");
+		individual_items.add("语言");
+		individual_items.add("设置");
+		arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,individual_items);
+		textSettingAdapter = new TextSettingAdapter(individual_items, this);
+		drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
+		drawerSettings = (RelativeLayout) drawerLayout.findViewById(R.id.main_right_drawer_layout);
+		ListView listView = (ListView) drawerSettings.findViewById(R.id.lv_individual);
+		listView.setAdapter(textSettingAdapter);
 		for(int i = 0;i != GlobalData.num_of_fragments;i ++){
 			View indicatorView = getIndicatorView(i);
 			mTabHost.addTab(mTabHost.newTabSpec(GlobalData.fragment_tags[i]).setIndicator(indicatorView),
@@ -55,7 +82,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         splashDialog = new SplashDialog(this, R.style.mydialog);
         splashDialog.show();
-        setTitleStyle();
+        //setTitleStyle();
         setContentView(R.layout.activity_main);
         initTabHost();
         initView();
@@ -79,4 +106,12 @@ public class MainActivity extends FragmentActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-}
+    public void Switch(View view){
+    	if(drawerLayout.isDrawerOpen(drawerSettings)){
+    		drawerLayout.closeDrawer(drawerSettings);
+    	}
+    	else{
+    		drawerLayout.openDrawer(drawerSettings);
+    	}
+    }
+   }

@@ -1,4 +1,4 @@
-package com.kof.view;
+package com.kof.adapter;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -170,10 +170,10 @@ public class SubMainHotnewsAdapter extends SubMainAdapter {
 
 			RelativeLayout relativeLayout5 = (RelativeLayout) activity
 					.getLayoutInflater().inflate(R.layout.pagerlayout, null);
-			relativeLayout5.setBackgroundResource(R.drawable.issue_5);
+			relativeLayout5.setBackgroundResource(R.drawable.issue_6);
 			TextView textView5 = (TextView) relativeLayout5
 					.findViewById(R.id.tv_pagerdesc);
-			textView5.setText("球色怡人,团团大法好");
+			textView5.setText("别急!今夏这15大球星仍有可能转会");
 			relativeLayouts.add(relativeLayout1);
 			relativeLayouts.add(relativeLayout2);
 			relativeLayouts.add(relativeLayout3);
