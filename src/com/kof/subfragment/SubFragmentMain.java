@@ -3,11 +3,13 @@ package com.kof.subfragment;
 import java.text.ParseException;
 import java.util.Date;
 
-import com.example.kof.R;
+import com.kof.R;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.kof.adapter.SubMainAdapter;
+import com.kof.model.DataHolder;
+import com.kof.model.SubMainDataHolder;
 import com.kof.net.LoadingTask;
 import com.kof.utils.DateManager;
 import com.kof.utils.Holder;
@@ -15,9 +17,11 @@ import com.kof.utils.Holder;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,14 +35,17 @@ public abstract class SubFragmentMain extends Fragment{
 	protected SubMainAdapter adapter;
 	protected Holder holder;
 	protected View layout;
+	protected DataHolder dataHolder;
+	protected int layoutResource;
 	
 	@Override
-	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		fatherActivity =getActivity();
-		this.holder = setUpDataHolder();
-//		adapter = new SubMainAdapter(holder, fatherActivity);
-		setUpPullToRefresh(layout);
+		this.layoutResource = R.layout.sub_fragment_main;
+		this.holder = setUpHolder();
+		setUpDataHolder();
+		adapter = new SubMainAdapter(fatherActivity,(SubMainDataHolder) dataHolder);
 		super.onActivityCreated(savedInstanceState);
 	}
 	@Override
@@ -46,7 +53,8 @@ public abstract class SubFragmentMain extends Fragment{
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		if(layout == null){
-			layout = inflater.inflate(R.layout.sub_fragment_main, null);
+			layout = inflater.inflate(layoutResource, null);
+			setUpPullToRefresh(layout);
 		}
 		 ViewGroup parent = (ViewGroup) layout.getParent();  
 		 if(parent!=null){
@@ -91,12 +99,20 @@ public abstract class SubFragmentMain extends Fragment{
 			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				// TODO Auto-generated method stub
-				new LoadingTask(mPullToRefreshListView).execute();
+				runRefreshTask(mPullToRefreshListView).execute();
 			}
 		});
 //		adapter = new SubMainAdapter(new SubMainHolder(fatherActivity), fatherActivity, R.layout.item_list);
 		ListView actualListView = mPullToRefreshListView.getRefreshableView();
 		actualListView.setAdapter(adapter);
 	}
-	protected abstract Holder setUpDataHolder();
+	public void setLayoutResource(int resource){
+		this.layoutResource = resource;
+	}
+	protected  AsyncTask<Void, Void, String> runRefreshTask(PullToRefreshListView listView){
+		return new LoadingTask(mPullToRefreshListView);
+	}
+		
+	protected abstract Holder setUpHolder();
+	protected abstract void setUpDataHolder();
 }

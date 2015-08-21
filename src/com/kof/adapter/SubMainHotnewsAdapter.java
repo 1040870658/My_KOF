@@ -19,9 +19,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.kof.R;
+import com.kof.R;
 import com.kof.activity.MainActivity;
 import com.kof.model.GlobalData;
+import com.kof.model.SubMainDataHolder;
 import com.kof.utils.Holder;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -32,8 +33,8 @@ public class SubMainHotnewsAdapter extends SubMainAdapter {
 	ImageHandler handler = new ImageHandler();
 	private AsyncViewPagerLoader asyncViewPagerLoader;
 
-	public SubMainHotnewsAdapter(Activity activity) {
-		super(activity);
+	public SubMainHotnewsAdapter(Activity activity,SubMainDataHolder dataHolder) {
+		super(activity,dataHolder);
 		// TODO Auto-generated constructor stub
 	}
 

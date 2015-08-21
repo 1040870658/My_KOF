@@ -2,7 +2,8 @@ package com.kof.utils;
 
 import java.util.ArrayList;
 
-import com.example.kof.R;
+
+import com.kof.R;
 import com.kof.model.GlobalData;
 import com.kof.model.SubMainImageDataHolder;
 

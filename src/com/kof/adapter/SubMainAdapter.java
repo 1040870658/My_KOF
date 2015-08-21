@@ -17,22 +17,26 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.kof.R;
+import com.kof.R;
+import com.kof.model.DataHolder;
 import com.kof.model.GlobalData;
 import com.kof.model.SubMainDataHolder;
 import com.kof.utils.Holder;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class SubMainAdapter extends BaseAdapter {
 
 	protected ImageLoader auto_imageLoader;
-	protected SubMainDataHolder dataHolder = new SubMainDataHolder();
+	protected SubMainDataHolder dataHolder ;;
 	protected Activity activity;
+	private String imageUrl; 
 
-	public SubMainAdapter(Activity activity) {
+	public SubMainAdapter(Activity activity,SubMainDataHolder dataHolder) {
 		// TODO Auto-generated constructor stub
 		this.activity = activity;
 		auto_imageLoader =  ImageLoader.getInstance();
+		this.dataHolder = dataHolder;
 	}
 
 	@Override
@@ -98,9 +102,12 @@ public class SubMainAdapter extends BaseAdapter {
 	public void refreshData(SubMainHolder holder, int position) {
 		// TODO Auto-generated method stub
 //		AsynImageLoader imageLoader = new AsynImageLoader(holder);
-//		imageLoader.execute(dataHolder.getImgSet()[position]);
-		String imageUrl = "drawable://"+dataHolder.getImgSet()[position];
-		auto_imageLoader.displayImage(imageUrl, holder.imageView);
+//		imageLoader.execute(position);
+		imageUrl = dataHolder.getImgSet().get(position);
+		holder.imageView.setTag(imageUrl);
+		holder.imageView.setImageDrawable(null);
+		if(holder.imageView.getTag()!=null && holder.imageView.getTag().equals(imageUrl))
+			auto_imageLoader.displayImage(imageUrl, holder.imageView);
 		holder.headTextView.setText(dataHolder.getTitleSet().get(position));
 		holder.summaryTextView
 				.setText(dataHolder.getSummarySet().get(position));
@@ -136,7 +143,7 @@ public class SubMainAdapter extends BaseAdapter {
 				return null;
 			else{
 				holder.imageView.setTag(Integer.valueOf(params[0]));
-				return activity.getResources().getDrawable(params[0]);
+				return Drawable.createFromPath(imageUrl);
 			}
 		}
 
@@ -146,4 +153,5 @@ public class SubMainAdapter extends BaseAdapter {
 			holder.imageView.setImageDrawable(result);
 		}
 	}
+	
 }

@@ -2,14 +2,12 @@ package com.kof.activity;
 
 import java.util.ArrayList;
 
-import com.example.kof.R;
 import com.kof.adapter.TextSettingAdapter;
 import com.kof.model.GlobalData;
 import com.kof.utils.SplashDialog;
 
-
+import com.kof.R;
 import android.app.Dialog;
-import android.content.res.Resources.Theme;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
@@ -19,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -67,6 +64,7 @@ public class MainActivity extends FragmentActivity {
 		arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,individual_items);
 		textSettingAdapter = new TextSettingAdapter(individual_items, this);
 		drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
+		drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 		drawerSettings = (RelativeLayout) drawerLayout.findViewById(R.id.main_right_drawer_layout);
 		ListView listView = (ListView) drawerSettings.findViewById(R.id.lv_individual);
 		listView.setAdapter(textSettingAdapter);

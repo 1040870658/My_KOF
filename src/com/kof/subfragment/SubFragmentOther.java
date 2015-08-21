@@ -1,15 +1,22 @@
 package com.kof.subfragment;
 
-import com.example.kof.R;
+import com.kof.R;
+import com.kof.model.SubMainDataHolder;
 import com.kof.utils.Holder;
 import com.kof.utils.SubMainHolder;
 
 public class SubFragmentOther extends SubFragmentMain{
 
 	@Override
-	protected Holder setUpDataHolder() {
+	protected void setUpDataHolder() {
 		// TODO Auto-generated method stub
-		return new SubMainHolder(getActivity(),R.layout.item_list);
+		dataHolder = new SubMainDataHolder();
+	}
+
+	@Override
+	protected Holder setUpHolder() {
+		// TODO Auto-generated method stub
+		return new SubMainHolder(getActivity(), R.layout.item_list);
 	}
 
 }

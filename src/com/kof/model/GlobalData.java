@@ -9,14 +9,19 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 
-import com.example.kof.*;
+import com.kof.R;
 import com.kof.fragment.FragmentData;
 import com.kof.fragment.FragmentGroup;
 import com.kof.fragment.FragmentMain;
 import com.kof.fragment.FragmentMatch;
+import com.kof.subfragment.SubFragmentEA;
 import com.kof.subfragment.SubFragmentFA;
+import com.kof.subfragment.SubFragmentGA;
+import com.kof.subfragment.SubFragmentIA;
 import com.kof.subfragment.SubFragmentMain;
 import com.kof.subfragment.SubFragmentMainHotnews;
+import com.kof.subfragment.SubFragmentOther;
+import com.kof.subfragment.SubFragmentSA;
 public class GlobalData {
 	private GlobalData(){
 	}
@@ -77,12 +82,33 @@ public class GlobalData {
 	
 	private static List<Fragment> fragments = new ArrayList<Fragment>();
 	public static List<Fragment> getFragments(){
-		fragments.add(new SubFragmentMainHotnews());
-		fragments.add(new SubFragmentMainHotnews());
-		fragments.add(new SubFragmentMainHotnews());
-		for(int i = 0;i < sub_main_num;i++){
-			fragments.add(new SubFragmentMainHotnews());
-		}
+		fragments.add(new SubFragmentMainHotnews());//头条
+		
+		fragments.add(new SubFragmentMainHotnews());//视频
+		
+		fragments.add(new SubFragmentMainHotnews());//集锦
+		
+		fragments.add(new SubFragmentMainHotnews());//深度
+		
+		fragments.add(new SubFragmentMainHotnews());//足彩
+		
+		fragments.add(new SubFragmentMainHotnews());//专题
+		
+		fragments.add(new SubFragmentMainHotnews());//闲情
+		
+		fragments.add(new SubFragmentMainHotnews());//转会
+		
+		fragments.add(new SubFragmentMainHotnews());//国内
+		
+		fragments.add(new SubFragmentEA());//英超
+		
+		fragments.add(new SubFragmentSA());//西甲
+		
+		fragments.add(new SubFragmentGA());//德甲
+		
+		fragments.add(new SubFragmentIA());//意甲
+		
+		fragments.add(new SubFragmentOther());//其他
 		return fragments;
 	}
 	

@@ -1,12 +1,13 @@
 package com.kof.net;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.os.AsyncTask;
 
 public class LoadingTask extends AsyncTask<Void, Void, String>{
 
-	private PullToRefreshListView mPullToRefreshListView;
+	protected PullToRefreshListView mPullToRefreshListView;
 	public LoadingTask(PullToRefreshListView mPullToRefreshListView){
 		super();
 		this.mPullToRefreshListView = mPullToRefreshListView; 

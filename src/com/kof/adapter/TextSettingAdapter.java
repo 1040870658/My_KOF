@@ -1,12 +1,15 @@
 package com.kof.adapter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.example.kof.R;
-import com.example.kof.R.color;
+import com.kof.R;
 
+import android.view.View.OnClickListener;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,11 +17,14 @@ import android.widget.TextView;
 
 public class TextSettingAdapter extends BaseAdapter{
 
+	private Map<String,OnClickListener> map;
 	private List<String> mListItems;
 	private Context context;
 	public TextSettingAdapter(List<String> mListItems,Context context){
 		this.mListItems = mListItems;
 		this.context = context;
+		map = new HashMap<String,OnClickListener>();
+		map.put(context.getResources().getString(R.string.share), new ShareListener());
 	}
 	@Override
 	public int getCount() {
@@ -29,13 +35,13 @@ public class TextSettingAdapter extends BaseAdapter{
 	@Override
 	public Object getItem(int arg0) {
 		// TODO Auto-generated method stub
-		return null;
+		return arg0;
 	}
 
 	@Override
 	public long getItemId(int arg0) {
 		// TODO Auto-generated method stub
-		return 0;
+		return arg0;
 	}
 
 	@Override
@@ -47,6 +53,7 @@ public class TextSettingAdapter extends BaseAdapter{
 			textViewHolder = new TextViewHolder();
 			textViewHolder.textView = (TextView) convertView.findViewById(R.id.tv_individual_name);
 			convertView.setTag(textViewHolder);
+			textViewHolder.textView.setOnClickListener( map.get(mListItems.get(position)));
 		}
 		else{
 			textViewHolder = (TextViewHolder) convertView.getTag();
@@ -56,5 +63,23 @@ public class TextSettingAdapter extends BaseAdapter{
 	}
 	private static class TextViewHolder{
 		public TextView textView;
+	}
+	
+	private void Share(){
+		Intent shareIntent = new Intent();
+		shareIntent.setAction(Intent.ACTION_SEND);
+		shareIntent.setType("text/plain");
+		shareIntent.putExtra(Intent.EXTRA_TEXT, context.getResources().getString(R.string.fake_name));
+		context.startActivity(Intent.createChooser(shareIntent, "ÍÆ¼ö¸øºÃÓÑ"));
+	}
+
+	private class ShareListener implements OnClickListener{
+
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			Share();
+		}
+		
 	}
 }

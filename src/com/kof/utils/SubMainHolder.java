@@ -3,13 +3,14 @@ package com.kof.utils;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.kof.R;
+import com.kof.R;
 import com.kof.model.GlobalData;
 import com.kof.model.SubMainDataHolder;
 
@@ -23,7 +24,7 @@ public class SubMainHolder implements Holder{
 	private Context context;
 	private List<String> mListItems;
 	private List<String> sListItems;
-	private int[] iListItems;
+	private List<String> iListItems;
 	public SubMainHolder(Context context,int resid){
 		this.context = context;
 		subMainDataHolder = new SubMainDataHolder();
@@ -51,7 +52,8 @@ public class SubMainHolder implements Holder{
 		
 		headTextView.setText(mListItems.get(position));
 		summaryTextView.setText(sListItems.get(position));
-		imageView.setImageResource(iListItems[position]);
+		Drawable drawable = Drawable.createFromPath(iListItems.get(position));
+		imageView.setImageDrawable(drawable);
 		
 	}
 

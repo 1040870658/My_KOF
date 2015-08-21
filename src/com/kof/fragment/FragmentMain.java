@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-import com.example.kof.*;
+import com.kof.R;
+import com.kof.adapter.FragmentViewPageAdapter;
 import com.kof.model.GlobalData;
 import com.kof.subfragment.SubFragmentFA;
 import com.kof.subfragment.SubFragmentMain;
 import com.kof.subfragment.SubFragmentMainHotnews;
-import com.kof.utils.FragmentViewPageAdapter;
 
 import android.R.integer;
 import android.os.Bundle;

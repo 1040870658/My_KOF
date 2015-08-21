@@ -1,6 +1,5 @@
 package com.kof.utils;
-import com.example.kof.R;
-
+import com.kof.R;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;

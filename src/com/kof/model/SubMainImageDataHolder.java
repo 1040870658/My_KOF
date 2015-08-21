@@ -2,9 +2,8 @@ package com.kof.model;
 
 import java.util.ArrayList;
 
-import com.example.kof.R;
-
-public class SubMainImageDataHolder {
+import com.kof.R;
+public class SubMainImageDataHolder extends DataHolder{
 	private ArrayList<String> title = new ArrayList<String>();
 	private ArrayList<int[]> imgList = new ArrayList<int[]>();
 	public SubMainImageDataHolder(){

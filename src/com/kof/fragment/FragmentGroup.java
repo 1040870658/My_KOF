@@ -1,6 +1,6 @@
 package com.kof.fragment;
 
-import com.example.kof.R;
+import com.kof.R;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
