@@ -18,6 +18,7 @@ import com.kof.model.DataHolder;
 import com.kof.model.GlobalData;
 import com.kof.model.SubMainDataHolder;
 import com.kof.net.HotNewsUpdateTask;
+import com.kof.net.LoadingTask;
 import com.kof.utils.Holder;
 import com.kof.utils.SubMainHolder;
 
@@ -50,9 +51,9 @@ public class SubFragmentMainHotnews extends SubFragmentMain {
 	protected AsyncTask<Void, Void, String> runRefreshTask(
 			PullToRefreshListView listView) {
 		// TODO Auto-generated method stub
+//		return new LoadingTask(mPullToRefreshListView);
 		return new HotNewsUpdateTask(mPullToRefreshListView,(SubMainDataHolder) dataHolder,adapter);
 	}
 
-	
 	
 }

@@ -2,11 +2,18 @@ package com.kof.activity;
 
 import java.util.ArrayList;
 
+import org.apache.http.conn.scheme.Scheme;
+
 import com.kof.adapter.TextSettingAdapter;
 import com.kof.model.GlobalData;
 import com.kof.utils.SplashDialog;
 
 import com.kof.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -18,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
@@ -73,6 +81,15 @@ public class MainActivity extends FragmentActivity {
 			mTabHost.addTab(mTabHost.newTabSpec(GlobalData.fragment_tags[i]).setIndicator(indicatorView),
 					GlobalData.fragment_class[i],new Bundle());
 		}
+		ImageView imageView = (ImageView) drawerLayout.findViewById(R.id.riv_image);
+		ImageLoader imageLoader = ImageLoader.getInstance();
+		DisplayImageOptions options = new DisplayImageOptions.Builder()
+	    .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
+	    .cacheInMemory(true)
+	    .cacheOnDisk(true)
+	    .resetViewBeforeLoading(true)
+	    .displayer(new RoundedBitmapDisplayer(112)).build();
+		imageLoader.displayImage("drawable://"+R.drawable.individual,imageView, options);
 	}
 	
     @Override

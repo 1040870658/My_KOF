@@ -1,5 +1,6 @@
 package com.kof.activity;
 
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -17,6 +18,9 @@ public class CustomApplication extends Application{
 		// TODO Auto-generated method stub
 		ImageLoaderConfiguration configuration = new ImageLoaderConfiguration
 				.Builder(this)
+				.memoryCache(new LruMemoryCache(2*1024*1024))
+				.memoryCacheSize(2*1024*1024)
+				.diskCacheSize((int) (Runtime.getRuntime().maxMemory()/4))
 				.threadPoolSize(3)
 				.build();
 		ImageLoader.getInstance().init(configuration);

@@ -1,9 +1,13 @@
 package com.kof.adapter;
 
+import java.net.HttpURLConnection;
 import java.util.List;
 
+import java.net.*;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.provider.ContactsContract.CommonDataKinds.Im;
@@ -14,6 +18,7 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,6 +32,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class SubMainAdapter extends BaseAdapter {
 
+	protected ListView mListView;
 	protected ImageLoader auto_imageLoader;
 	protected SubMainDataHolder dataHolder ;;
 	protected Activity activity;
@@ -58,9 +64,12 @@ public class SubMainAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup arg2) {
+	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		SubMainHolder holder;
+		if(mListView == null){
+			mListView = (ListView)parent;
+		}
 		if (convertView == null || convertView.getTag() == null) {
 			holder = new SubMainHolder(activity);
 			convertView = setUpConvertView(holder);
@@ -102,7 +111,6 @@ public class SubMainAdapter extends BaseAdapter {
 	public void refreshData(SubMainHolder holder, int position) {
 		// TODO Auto-generated method stub
 //		AsynImageLoader imageLoader = new AsynImageLoader(holder);
-//		imageLoader.execute(position);
 		imageUrl = dataHolder.getImgSet().get(position);
 		holder.imageView.setTag(imageUrl);
 		holder.imageView.setImageDrawable(null);
@@ -130,28 +138,47 @@ public class SubMainAdapter extends BaseAdapter {
 		}
 	}
 
-	private class AsynImageLoader extends AsyncTask<Integer, Void, Drawable> {
+	private class AsynImageLoader extends AsyncTask<String, Void, BitmapDrawable> {
 
 		private SubMainHolder holder;
 		public AsynImageLoader(SubMainHolder holder){
 			this.holder = holder;
 		}
 		@Override
-		protected Drawable doInBackground(Integer... params) {
+		protected BitmapDrawable doInBackground(String... params) {
 			// TODO Auto-generated method stub
-			if(holder.imageView.getTag()==Integer.valueOf(params[0]))
-				return null;
-			else{
-				holder.imageView.setTag(Integer.valueOf(params[0]));
-				return Drawable.createFromPath(imageUrl);
-			}
+			String url = params[0];
+			 BitmapDrawable drawable = new BitmapDrawable(activity.getResources(), downloadBitmap(url));  
+			return drawable;
 		}
 
 		@Override
-		protected void onPostExecute(Drawable result) {
+		protected void onPostExecute(BitmapDrawable result) {
 			// TODO Auto-generated method stub
-			holder.imageView.setImageDrawable(result);
+			ImageView imageView = (ImageView) mListView.findViewWithTag(imageUrl);  
+			if (imageView != null && result != null) { 
+				imageView.setImageDrawable(result);
+			}
 		}
+		private Bitmap downloadBitmap(String imageUrl) {
+			Bitmap bitmap = null;
+			HttpURLConnection con = null;
+			try {
+				URL url = new URL(imageUrl);
+				con = (HttpURLConnection) url.openConnection();
+				con.setConnectTimeout(5 * 1000);
+				con.setReadTimeout(10 * 1000);
+				bitmap = BitmapFactory.decodeStream(con.getInputStream());
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (con != null) {
+					con.disconnect();
+				}
+			}
+			return bitmap;
+		}
+
 	}
 	
 }

@@ -74,7 +74,7 @@
         android:orientation="vertical"
         android:paddingTop="50dp"
         android:gravity="center" >
-        <com.kof.view.RoundImageView
+        <ImageView
            android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
