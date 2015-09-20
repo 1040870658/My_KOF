@@ -24,9 +24,16 @@ public class SubMainDataHolder extends DataHolder{
 		imageURLs = new LinkedList<String>();
 		sListItems.addAll(Arrays.asList(mStrings));
 		mListItems.addAll(Arrays.asList(mStrings));
-		for(int item : imgId){
-			imageURLs.add("drawable://"+item);
-		}
+//		for(int item : imgId){
+//			imageURLs.add("drawable://"+item);
+//		}
+		imageURLs.add("http://img.dongqiudi.com/uploads9/150919/392-1509191K12RB.png!cover");
+		imageURLs.add("http://img.dongqiudi.com/uploads8/allimg/150910/524-15091001011E25.jpg!cover");
+		imageURLs.add("http://img.dongqiudi.com/uploads9/allimg/150920/319-1509200156040-L.jpg!cover");
+		imageURLs.add("http://img.dongqiudi.com/uploads9/150920/526-150920002452C4.jpg!cover");
+		imageURLs.add("http://img.dongqiudi.com/uploads9/allimg/150920/255-1509200431060-L.jpg!cover");
+		imageURLs.add("http://img.dongqiudi.com/uploads9/allimg/150919/255-1509192309200-L.jpg!cover");
+		imageURLs.add("http://img.dongqiudi.com/uploads9/allimg/150920/497-1509201400410-L.jpg!litpic");
 		imageURLs.add("http://img.dongqiudi.com/uploads8/allimg/150820/526-150R0043024419-lp.jpg!cover");
 	}
 	public List<String> getTitleSet(){
@@ -37,6 +44,9 @@ public class SubMainDataHolder extends DataHolder{
 	}
 	public List<String> getImgSet(){
 		return imageURLs;
+	}
+	public int[] getImgid(){
+		return imgId;
 	}
 	public int getLength(){
 		return mListItems.size();

@@ -28,7 +28,7 @@ public class SubFragmentMainHotnews extends SubFragmentMain {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		adapter = new SubMainHotnewsAdapter(getActivity(),(SubMainDataHolder) dataHolder);
-		CustomApplication.getRefWatcher(getActivity()).watch(this);
+		//CustomApplication.getRefWatcher(getActivity()).watch(this);
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 

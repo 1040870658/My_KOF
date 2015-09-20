@@ -22,18 +22,22 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.Volley;
 import com.kof.R;
 import com.kof.model.DataHolder;
 import com.kof.model.GlobalData;
 import com.kof.model.SubMainDataHolder;
 import com.kof.utils.Holder;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.kof.utils.MyCache;
+
 
 public class SubMainAdapter extends BaseAdapter {
 
 	protected ListView mListView;
-	protected ImageLoader auto_imageLoader;
+	protected ImageLoader volley_imageLoader;
 	protected SubMainDataHolder dataHolder ;;
 	protected Activity activity;
 	private String imageUrl; 
@@ -41,7 +45,9 @@ public class SubMainAdapter extends BaseAdapter {
 	public SubMainAdapter(Activity activity,SubMainDataHolder dataHolder) {
 		// TODO Auto-generated constructor stub
 		this.activity = activity;
-		auto_imageLoader =  ImageLoader.getInstance();
+		 RequestQueue queue = Volley.newRequestQueue(activity);  
+		//auto_imageLoader =  ImageLoader.getInstance();
+		 volley_imageLoader = new ImageLoader(queue, new MyCache());  
 		this.dataHolder = dataHolder;
 	}
 
@@ -100,7 +106,7 @@ public class SubMainAdapter extends BaseAdapter {
 				.findViewById(R.id.tv_title);
 		holder.summaryTextView = (TextView) convertView
 				.findViewById(R.id.tv_summary);
-		holder.imageView = (ImageView) convertView.findViewById(R.id.iv_title);
+		holder.imageView = (NetworkImageView) convertView.findViewById(R.id.iv_title);
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 				GlobalData.getScreenWidth(activity) / 3,
 				GlobalData.getScreenHeight(activity) / 8);
@@ -112,10 +118,11 @@ public class SubMainAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 //		AsynImageLoader imageLoader = new AsynImageLoader(holder);
 		imageUrl = dataHolder.getImgSet().get(position);
-		holder.imageView.setTag(imageUrl);
-		holder.imageView.setImageDrawable(null);
-		if(holder.imageView.getTag()!=null && holder.imageView.getTag().equals(imageUrl))
-			auto_imageLoader.displayImage(imageUrl, holder.imageView);
+//		holder.imageView.setTag(imageUrl);
+//		holder.imageView.setImageDrawable(null);
+//		if(holder.imageView.getTag()!=null && holder.imageView.getTag().equals(imageUrl))
+//			auto_imageLoader.displayImage(imageUrl, holder.imageView);
+		holder.imageView.setImageUrl(imageUrl, volley_imageLoader);
 		holder.headTextView.setText(dataHolder.getTitleSet().get(position));
 		holder.summaryTextView
 				.setText(dataHolder.getSummarySet().get(position));
@@ -126,7 +133,7 @@ public class SubMainAdapter extends BaseAdapter {
 		public int resid = R.layout.item_list;
 		public TextView headTextView;
 		public TextView summaryTextView;
-		public ImageView imageView;
+		public NetworkImageView imageView;
 		private Activity activity;
 
 		public SubMainHolder(Activity activity) {

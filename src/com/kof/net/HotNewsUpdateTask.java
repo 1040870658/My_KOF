@@ -36,7 +36,7 @@ public class HotNewsUpdateTask extends LoadingTask{
 	@Override
 	protected void onPostExecute(String result) {
 		// TODO Auto-generated method stub
-		dataHolder.addImage("http://img.dongqiudi.com/uploads8/allimg/150820/526-150R0043024419-lp.jpg!cover");
+		dataHolder.addImage("http://img.dongqiudi.com/uploads9/allimg/150920/521-1509201403550-L.jpg!litpic");
 		dataHolder.addTitle("news");
 		adapter.notifyDataSetChanged();
 		mPullToRefreshListView.onRefreshComplete();

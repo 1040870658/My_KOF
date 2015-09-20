@@ -82,6 +82,7 @@ public class GlobalData {
 	
 	private static List<Fragment> fragments = new ArrayList<Fragment>();
 	public static List<Fragment> getFragments(){
+		if(0 == fragments.size()){
 		fragments.add(new SubFragmentMainHotnews());//头条
 		
 		fragments.add(new SubFragmentMainHotnews());//视频
@@ -109,6 +110,7 @@ public class GlobalData {
 		fragments.add(new SubFragmentIA());//意甲
 		
 		fragments.add(new SubFragmentOther());//其他
+		}
 		return fragments;
 	}
 	
