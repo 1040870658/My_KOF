@@ -2,6 +2,7 @@ package com.kof.utils;
 
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
+import android.util.Log;
 
 import com.android.volley.toolbox.ImageLoader.ImageCache;
 
@@ -21,6 +22,7 @@ public class MyCache implements ImageCache{
 	@Override
 	public Bitmap getBitmap(String url) {
 		// TODO Auto-generated method stub
+		Log.e("get", url);
 		return mCache.get(url);
 	}
 

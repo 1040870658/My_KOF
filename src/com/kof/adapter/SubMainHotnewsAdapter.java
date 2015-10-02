@@ -69,7 +69,10 @@ public class SubMainHotnewsAdapter extends SubMainAdapter {
 					ImageHandler.MSG_DELAY);
 			return pagerView;
 		}
-		return super.getView(position - 1, null, arg2);
+		if(convertView != null && convertView.getTag() != null)
+			return super.getView(position - 1, convertView, arg2);
+		else
+			return super.getView(position - 1, null, arg2);
 	}
 
 	private void setUpViewPager(View convertView, ViewPager viewPager,

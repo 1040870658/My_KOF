@@ -3,7 +3,15 @@ package com.kof.activity;
 import java.util.ArrayList;
 
 import org.apache.http.conn.scheme.Scheme;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.kof.adapter.TextSettingAdapter;
 import com.kof.model.GlobalData;
 import com.kof.utils.SplashDialog;
@@ -20,6 +28,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -98,6 +107,32 @@ public class MainActivity extends FragmentActivity {
         splashDialog = new SplashDialog(this, R.style.mydialog);
         splashDialog.show();
         //setTitleStyle();
+        RequestQueue mQueue = Volley.newRequestQueue(this); 
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("http://www.dongqiudi.com/archives/2?page=1", null,
+        		new Response.Listener<JSONObject>() {
+        			@Override
+        			public void onResponse(JSONObject response) {
+        				JSONArray jsonArray;
+						try {
+							jsonArray = response.getJSONArray("data");
+							for(int i = 0;i != jsonArray.length();i ++){
+								JSONObject jsonObject = jsonArray.getJSONObject(i);
+								Log.e("title", jsonObject.getString("title"));
+								Log.e("description", jsonObject.getString("description"));
+								Log.e("thumb", jsonObject.getString("thumb"));
+							}
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+        			}
+        		}, new Response.ErrorListener() {
+        			@Override
+        			public void onErrorResponse(VolleyError error) {
+        				Log.e("TAG", error.getMessage(), error);
+        			}
+        		});
+        mQueue.add(jsonObjectRequest);
         setContentView(R.layout.activity_main);
         initTabHost();
         initView();

@@ -17,6 +17,7 @@ public class CustomApplication extends Application{
 		ImageLoaderConfiguration configuration = new ImageLoaderConfiguration
 				.Builder(this)
 				.memoryCache(new LruMemoryCache(2*1024*1024))
+				.memoryCacheExtraOptions(48, 60)
 				.memoryCacheSize(2*1024*1024)
 				.diskCacheSize((int) (Runtime.getRuntime().maxMemory()/4))
 				.threadPoolSize(3)
