@@ -28,6 +28,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class SubMainHotnewsAdapter extends SubMainAdapter {
 
+	private final int ISSUE = 0;
+	private final int GENERAL = 1;
 	private View pagerView;
 	private ViewPagerHolder viewPagerHolderholder;
 	ImageHandler handler = new ImageHandler();
@@ -50,29 +52,56 @@ public class SubMainHotnewsAdapter extends SubMainAdapter {
 		return super.getItem(position);
 	}
 
+	
+	@Override
+	public int getItemViewType(int position) {
+		// TODO Auto-generated method stub
+		if(0 == position){
+			return ISSUE;
+		}
+		else{
+			return GENERAL;
+		}
+	}
+
+	@Override
+	public int getViewTypeCount() {
+		// TODO Auto-generated method stub
+		return 2;
+	}
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup arg2) {
 		// TODO Auto-generated method stub
-
-		if (position == 0) {
-			if (pagerView == null) {
-
+		viewPagerHolderholder = null;
+		int type = getItemViewType(position);
+		if (convertView == null) {
+			if (ISSUE == type) {
+			
 				viewPagerHolderholder = new ViewPagerHolder(activity);
 				pagerView = activity.getLayoutInflater().inflate(
 						R.layout.sub_fragment_host_news, null);
+				convertView = pagerView;
 				setUpViewPager(pagerView, viewPagerHolderholder.viewPager,
 						activity.getLayoutInflater());
+				handler.sendEmptyMessageDelayed(ImageHandler.MSG_UPDATE_IMAGE,
+						ImageHandler.MSG_DELAY);
+				convertView.setTag(viewPagerHolderholder);
+				return convertView;
 			} else {
-				
+				return super.getView(position - 1, convertView, arg2);
 			}
-			handler.sendEmptyMessageDelayed(ImageHandler.MSG_UPDATE_IMAGE,
-					ImageHandler.MSG_DELAY);
-			return pagerView;
+			
 		}
-		if(convertView != null && convertView.getTag() != null)
-			return super.getView(position - 1, convertView, arg2);
-		else
-			return super.getView(position - 1, null, arg2);
+		else{
+			if(ISSUE == type){
+				viewPagerHolderholder = (ViewPagerHolder) convertView.getTag();
+				return convertView;
+			}
+			else{
+				return super.getView(position - 1, convertView, arg2);
+			}
+		}
 	}
 
 	private void setUpViewPager(View convertView, ViewPager viewPager,
@@ -133,6 +162,7 @@ public class SubMainHotnewsAdapter extends SubMainAdapter {
 			AsyncTask<Void, Void, IssueAdapter> {
 
 		private ViewPager viewPager;
+		private IssueAdapter issueAdapter;
 
 		public AsyncViewPagerLoader(ViewPager viewPager) {
 			super();
@@ -184,7 +214,7 @@ public class SubMainHotnewsAdapter extends SubMainAdapter {
 			relativeLayouts.add(relativeLayout4);
 			relativeLayouts.add(relativeLayout5);
 
-			IssueAdapter issueAdapter = new IssueAdapter(relativeLayouts);
+			issueAdapter = new IssueAdapter(relativeLayouts);
 			return issueAdapter;
 		}
 

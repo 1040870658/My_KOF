@@ -83,7 +83,7 @@ public class SubMainAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		SubMainHolder holder;
 		
-		if (convertView == null ) {
+		if (convertView == null) {
 			holder = new SubMainHolder(activity);
 			convertView = setUpConvertView(holder);
 			setUp(convertView,holder);
