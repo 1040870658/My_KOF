@@ -74,7 +74,6 @@ public class FragmentMain extends Fragment {
 		mTabHost = (FragmentTabHost) view.findViewById(android.R.id.tabhost);
 		horizontalScrollView = (HorizontalScrollView) mTabHost
 				.findViewById(R.id.tab_scroll);
-		initViewPager(mTabHost);
 		mTabHost.setup(getActivity(), getChildFragmentManager(),
 				android.R.id.tabcontent);
 		for (int i = 0; i < GlobalData.sub_main_num; i++) {
@@ -84,15 +83,15 @@ public class FragmentMain extends Fragment {
 					.setText(GlobalData.subMain[i]);
 			mTabHost.addTab(mTabHost.newTabSpec("sub_main_tab" + i)
 					.setIndicator(indicatorView), SubFragmentMainHotnews.class,
-					null);
+					new Bundle());
 		}
-
+	//	initViewPager(mTabHost);
 		mTabHost.setOnTabChangedListener(new OnTabChangeListener() {
 			@Override
 			public void onTabChanged(String arg0) {
 				// TODO Auto-generated method stub
 				int currentTab = mTabHost.getCurrentTab();
-				viewPager.setCurrentItem(currentTab);
+				//viewPager.setCurrentItem(currentTab);
 				if (currentTab >= GlobalData.DISPLAY_NUM / 2) {
 					horizontalScrollView.smoothScrollTo(
 							(int) horizontalScrollView.getX()
@@ -139,10 +138,10 @@ public class FragmentMain extends Fragment {
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
-		super.onResume();
 		horizontalScrollView.smoothScrollTo((int) horizontalScrollView.getX()
 				+ movingCount(mTabHost.getCurrentTab()),
 				(int) horizontalScrollView.getY());
+		super.onResume();
 	}
 
 }

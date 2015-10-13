@@ -17,10 +17,5 @@ public class SubFragmentEA extends SubFragmentMain{
 		dataHolder = new SubMainDataHolder();
 	}
 
-	@Override
-	protected Holder setUpHolder() {
-		// TODO Auto-generated method stub
-		return new SubMainHolder(getActivity(), R.layout.item_list);
-	}
 
 }

@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.widget.ImageView;
 
 public class SplashDialog extends Dialog {
-    ImageView splashscreen;
     int splashTime = 4000;
 
     public SplashDialog(Context context, int theme) {
@@ -24,9 +23,10 @@ public class SplashDialog extends Dialog {
         	
             @Override
             public void run() {
-                cancel();
+              dismiss();
             }
         }, splashTime);
 
     }
+    
 }

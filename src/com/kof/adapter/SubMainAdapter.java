@@ -23,7 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kof.R;
-import com.kof.model.DataHolder;
+import com.kof.activity.CustomApplication;
 import com.kof.model.GlobalData;
 import com.kof.model.SubMainDataHolder;
 import com.kof.utils.Holder;
@@ -39,13 +39,24 @@ public class SubMainAdapter extends BaseAdapter {
 	protected ImageLoader auto_imageLoader;
 	protected SubMainDataHolder dataHolder ;;
 	protected Activity activity;
-	private String imageUrl; 
+	private AbsListView.LayoutParams lp;
+	private RelativeLayout.LayoutParams params ;
 
 	public SubMainAdapter(Activity activity,SubMainDataHolder dataHolder) {
 		// TODO Auto-generated constructor stub
 		this.activity = activity;
+		lp = new AbsListView.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				GlobalData.getScreenHeight(activity) / 7);
+		params = new RelativeLayout.LayoutParams(
+				GlobalData.getScreenWidth(activity) / 3,
+				GlobalData.getScreenHeight(activity) / 8);
 		auto_imageLoader =  ImageLoader.getInstance();
-		options  = new DisplayImageOptions.Builder().cacheInMemory(true).build();
+		options  = new DisplayImageOptions.Builder().
+				cacheInMemory(false).
+				showImageOnLoading(android.R.color.white).
+				resetViewBeforeLoading(true).
+				build();
 		this.dataHolder = dataHolder;
 	}
 
@@ -88,10 +99,6 @@ public class SubMainAdapter extends BaseAdapter {
 	protected View setUpConvertView(SubMainHolder holder) {
 		View convertView = activity.getLayoutInflater().inflate(holder.resid,
 				null);
-		;
-		AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT,
-				GlobalData.getScreenHeight(activity) / 7);
 		convertView.setLayoutParams(lp);
 		return convertView;
 	}
@@ -103,9 +110,6 @@ public class SubMainAdapter extends BaseAdapter {
 		holder.summaryTextView = (TextView) convertView
 				.findViewById(R.id.tv_summary);
 		holder.imageView = (ImageView) convertView.findViewById(R.id.iv_title);
-		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-				GlobalData.getScreenWidth(activity) / 3,
-				GlobalData.getScreenHeight(activity) / 8);
 		params.addRule(RelativeLayout.CENTER_VERTICAL);
 		holder.imageView.setLayoutParams(params);
 	}
@@ -113,16 +117,14 @@ public class SubMainAdapter extends BaseAdapter {
 	public void refreshData(SubMainHolder holder, int position) {
 		// TODO Auto-generated method stub
 //		AsynImageLoader imageLoader = new AsynImageLoader(holder);
-		imageUrl = dataHolder.getImgSet().get(position);
 //		holder.imageView.setTag(imageUrl);
 //		holder.imageView.setImageDrawable(null);
 //		if(holder.imageView.getTag()!=null && holder.imageView.getTag().equals(imageUrl))
 //			auto_imageLoader.displayImage(imageUrl, holder.imageView);
-		auto_imageLoader.displayImage(imageUrl, holder.imageView,options);
+		auto_imageLoader.displayImage(dataHolder.getImgSet().get(position), holder.imageView,options);
 		holder.headTextView.setText(dataHolder.getTitleSet().get(position));
 		holder.summaryTextView
 				.setText(dataHolder.getSummarySet().get(position));
-
 	}
 
 	static class SubMainHolder {
@@ -141,47 +143,47 @@ public class SubMainAdapter extends BaseAdapter {
 		}
 	}
 
-	private class AsynImageLoader extends AsyncTask<String, Void, BitmapDrawable> {
-
-		private SubMainHolder holder;
-		public AsynImageLoader(SubMainHolder holder){
-			this.holder = holder;
-		}
-		@Override
-		protected BitmapDrawable doInBackground(String... params) {
-			// TODO Auto-generated method stub
-			String url = params[0];
-			 BitmapDrawable drawable = new BitmapDrawable(activity.getResources(), downloadBitmap(url));  
-			return drawable;
-		}
-
-		@Override
-		protected void onPostExecute(BitmapDrawable result) {
-			// TODO Auto-generated method stub
-			ImageView imageView = (ImageView) mListView.findViewWithTag(imageUrl);  
-			if (imageView != null && result != null) { 
-				imageView.setImageDrawable(result);
-			}
-		}
-		private Bitmap downloadBitmap(String imageUrl) {
-			Bitmap bitmap = null;
-			HttpURLConnection con = null;
-			try {
-				URL url = new URL(imageUrl);
-				con = (HttpURLConnection) url.openConnection();
-				con.setConnectTimeout(5 * 1000);
-				con.setReadTimeout(10 * 1000);
-				bitmap = BitmapFactory.decodeStream(con.getInputStream());
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if (con != null) {
-					con.disconnect();
-				}
-			}
-			return bitmap;
-		}
-
-	}
+//	private class AsynImageLoader extends AsyncTask<String, Void, BitmapDrawable> {
+//
+//		private SubMainHolder holder;
+//		public AsynImageLoader(SubMainHolder holder){
+//			this.holder = holder;
+//		}
+//		@Override
+//		protected BitmapDrawable doInBackground(String... params) {
+//			// TODO Auto-generated method stub
+//			String url = params[0];
+//			 BitmapDrawable drawable = new BitmapDrawable(activity.getResources(), downloadBitmap(url));  
+//			return drawable;
+//		}
+//
+//		@Override
+//		protected void onPostExecute(BitmapDrawable result) {
+//			// TODO Auto-generated method stub
+//			ImageView imageView = (ImageView) mListView.findViewWithTag(imageUrl);  
+//			if (imageView != null && result != null) { 
+//				imageView.setImageDrawable(result);
+//			}
+//		}
+//		private Bitmap downloadBitmap(String imageUrl) {
+//			Bitmap bitmap = null;
+//			HttpURLConnection con = null;
+//			try {
+//				URL url = new URL(imageUrl);
+//				con = (HttpURLConnection) url.openConnection();
+//				con.setConnectTimeout(5 * 1000);
+//				con.setReadTimeout(10 * 1000);
+//				bitmap = BitmapFactory.decodeStream(con.getInputStream());
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			} finally {
+//				if (con != null) {
+//					con.disconnect();
+//				}
+//			}
+//			return bitmap;
+//		}
+//
+//	}
 	
 }

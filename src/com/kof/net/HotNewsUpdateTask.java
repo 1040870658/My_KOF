@@ -6,7 +6,6 @@ import android.widget.BaseAdapter;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.kof.adapter.SubMainAdapter;
-import com.kof.model.DataHolder;
 import com.kof.model.SubMainDataHolder;
 
 public class HotNewsUpdateTask extends LoadingTask{

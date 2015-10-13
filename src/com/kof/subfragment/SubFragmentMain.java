@@ -3,18 +3,6 @@ package com.kof.subfragment;
 import java.text.ParseException;
 import java.util.Date;
 
-import com.kof.R;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.kof.adapter.SubMainAdapter;
-import com.kof.model.DataHolder;
-import com.kof.model.SubMainDataHolder;
-import com.kof.net.LoadingTask;
-import com.kof.utils.DateManager;
-import com.kof.utils.Holder;
-
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -27,31 +15,42 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.kof.R;
+import com.kof.activity.CustomApplication;
+import com.kof.adapter.SubMainAdapter;
+import com.kof.model.SubMainDataHolder;
+import com.kof.net.LoadingTask;
+import com.kof.utils.DateManager;
+
 public abstract class SubFragmentMain extends Fragment{
 
 	protected PullToRefreshListView mPullToRefreshListView;
 	protected DateManager dateManager;
 	protected Activity fatherActivity;
 	protected SubMainAdapter adapter;
-	protected Holder holder;
 	protected View layout;
-	protected DataHolder dataHolder;
+	protected SubMainDataHolder dataHolder;
 	protected int layoutResource;
+	protected int count = 0;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		Log.e("onCreate", this.getClass().getName());
 		fatherActivity =getActivity();
 		this.layoutResource = R.layout.sub_fragment_main;
-		this.holder = setUpHolder();
 		setUpDataHolder();
-		adapter = new SubMainAdapter(fatherActivity,(SubMainDataHolder) dataHolder);
-		super.onActivityCreated(savedInstanceState);
+		adapter = new SubMainAdapter(fatherActivity,dataHolder);
+		super.onCreate(savedInstanceState);
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		Log.e("onCreateView", this.getClass().getName());
 		if(layout == null){
 			layout = inflater.inflate(layoutResource, null);
 			setUpPullToRefresh(layout);
@@ -113,6 +112,50 @@ public abstract class SubFragmentMain extends Fragment{
 		return new LoadingTask(mPullToRefreshListView);
 	}
 		
-	protected abstract Holder setUpHolder();
 	protected abstract void setUpDataHolder();
+	@Override
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		Log.e("onActivityCreated", this.getClass().getName());
+		super.onActivityCreated(savedInstanceState);
+	}
+	@Override
+	public void onAttach(Activity activity) {
+		// TODO Auto-generated method stub
+		Log.e("onAttach", this.getClass().getName());
+		super.onAttach(activity);
+	}
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		Log.e("onDestroy", this.getClass().getName());
+		super.onDestroy();
+	}
+	@Override
+	public void onDetach() {
+		// TODO Auto-generated method stub
+		Log.e("onDetach", this.getClass().getName());
+		super.onDetach();
+	}
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		Log.e("onPause", this.getClass().getName());
+		super.onPause();
+	}
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		Log.e("onStart", this.getClass().getName());
+//		CustomApplication.getRefWatcher(fatherActivity).watch(this);
+		super.onStart();
+	}
+	@Override
+	public void onStop() {
+		// TODO Auto-generated method stub
+		Log.e("onStop", this.getClass().getName());
+		super.onStop();
+	}
+	
+	
 }

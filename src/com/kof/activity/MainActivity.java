@@ -107,32 +107,6 @@ public class MainActivity extends FragmentActivity {
         splashDialog = new SplashDialog(this, R.style.mydialog);
         splashDialog.show();
         //setTitleStyle();
-        RequestQueue mQueue = Volley.newRequestQueue(this); 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("http://www.dongqiudi.com/archives/2?page=1", null,
-        		new Response.Listener<JSONObject>() {
-        			@Override
-        			public void onResponse(JSONObject response) {
-        				JSONArray jsonArray;
-						try {
-							jsonArray = response.getJSONArray("data");
-							for(int i = 0;i != jsonArray.length();i ++){
-								JSONObject jsonObject = jsonArray.getJSONObject(i);
-								Log.e("title", jsonObject.getString("title"));
-								Log.e("description", jsonObject.getString("description"));
-								Log.e("thumb", jsonObject.getString("thumb"));
-							}
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-        			}
-        		}, new Response.ErrorListener() {
-        			@Override
-        			public void onErrorResponse(VolleyError error) {
-        				Log.e("TAG", error.getMessage(), error);
-        			}
-        		});
-        mQueue.add(jsonObjectRequest);
         setContentView(R.layout.activity_main);
         initTabHost();
         initView();

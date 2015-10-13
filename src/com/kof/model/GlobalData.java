@@ -56,6 +56,10 @@ public class GlobalData {
 		FragmentGroup.class,
 		FragmentData.class
 	};
+//	public static Class[] subFragment_classClasses={
+//		SubFragmentMainHotnews.class,
+//		
+//	}
 	public static int[] tab_layouts ={
 		R.layout.tab_main,
 		R.layout.tab_match,
@@ -101,24 +105,28 @@ public class GlobalData {
 		
 		fragments.add(new SubFragmentMainHotnews());//国内
 		
-		fragments.add(new SubFragmentEA());//英超
+	
 		
-		fragments.add(new SubFragmentSA());//西甲
+fragments.add(new SubFragmentMainHotnews());//足彩
 		
-		fragments.add(new SubFragmentGA());//德甲
+		fragments.add(new SubFragmentMainHotnews());//专题
 		
-		fragments.add(new SubFragmentIA());//意甲
+		fragments.add(new SubFragmentMainHotnews());//闲情
 		
-		fragments.add(new SubFragmentOther());//其他
+		fragments.add(new SubFragmentMainHotnews());//转会
+		
+		fragments.add(new SubFragmentMainHotnews());//国内
+//		fragments.add(new SubFragmentEA());//英超
+//		
+//		fragments.add(new SubFragmentSA());//西甲
+//		
+//		fragments.add(new SubFragmentGA());//德甲
+//		
+//		fragments.add(new SubFragmentIA());//意甲
+//		
+//		fragments.add(new SubFragmentOther());//其他
 		}
 		return fragments;
 	}
-	
-	private static String[] mStrings = { "Abbaye de Belloc",
-			"Abbaye du Mont des Cats", "Abertam", "Abondance", "Ackawi",
-			"Acorn","曼城3-0西布朗，亚亚图雷梅开二度" };
-	private static int[] imgId = { R.drawable.news_1, R.drawable.news_2,
-			R.drawable.news_3, R.drawable.news_4, R.drawable.news_5,
-			R.drawable.news_6 ,R.drawable.news_7};
 
 }

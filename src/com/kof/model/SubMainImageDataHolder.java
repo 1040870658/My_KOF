@@ -3,7 +3,7 @@ package com.kof.model;
 import java.util.ArrayList;
 
 import com.kof.R;
-public class SubMainImageDataHolder extends DataHolder{
+public class SubMainImageDataHolder{
 	private ArrayList<String> title = new ArrayList<String>();
 	private ArrayList<int[]> imgList = new ArrayList<int[]>();
 	public SubMainImageDataHolder(){
