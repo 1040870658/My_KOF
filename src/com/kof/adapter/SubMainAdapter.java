@@ -116,11 +116,6 @@ public class SubMainAdapter extends BaseAdapter {
 
 	public void refreshData(SubMainHolder holder, int position) {
 		// TODO Auto-generated method stub
-//		AsynImageLoader imageLoader = new AsynImageLoader(holder);
-//		holder.imageView.setTag(imageUrl);
-//		holder.imageView.setImageDrawable(null);
-//		if(holder.imageView.getTag()!=null && holder.imageView.getTag().equals(imageUrl))
-//			auto_imageLoader.displayImage(imageUrl, holder.imageView);
 		auto_imageLoader.displayImage(dataHolder.getImgSet().get(position), holder.imageView,options);
 		holder.headTextView.setText(dataHolder.getTitleSet().get(position));
 		holder.summaryTextView
@@ -142,48 +137,5 @@ public class SubMainAdapter extends BaseAdapter {
 			return resid;
 		}
 	}
-
-//	private class AsynImageLoader extends AsyncTask<String, Void, BitmapDrawable> {
-//
-//		private SubMainHolder holder;
-//		public AsynImageLoader(SubMainHolder holder){
-//			this.holder = holder;
-//		}
-//		@Override
-//		protected BitmapDrawable doInBackground(String... params) {
-//			// TODO Auto-generated method stub
-//			String url = params[0];
-//			 BitmapDrawable drawable = new BitmapDrawable(activity.getResources(), downloadBitmap(url));  
-//			return drawable;
-//		}
-//
-//		@Override
-//		protected void onPostExecute(BitmapDrawable result) {
-//			// TODO Auto-generated method stub
-//			ImageView imageView = (ImageView) mListView.findViewWithTag(imageUrl);  
-//			if (imageView != null && result != null) { 
-//				imageView.setImageDrawable(result);
-//			}
-//		}
-//		private Bitmap downloadBitmap(String imageUrl) {
-//			Bitmap bitmap = null;
-//			HttpURLConnection con = null;
-//			try {
-//				URL url = new URL(imageUrl);
-//				con = (HttpURLConnection) url.openConnection();
-//				con.setConnectTimeout(5 * 1000);
-//				con.setReadTimeout(10 * 1000);
-//				bitmap = BitmapFactory.decodeStream(con.getInputStream());
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			} finally {
-//				if (con != null) {
-//					con.disconnect();
-//				}
-//			}
-//			return bitmap;
-//		}
-//
-//	}
 	
 }

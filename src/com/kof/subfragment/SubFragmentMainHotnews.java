@@ -13,13 +13,12 @@ import android.view.ViewGroup;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.kof.adapter.SubMainHotnewsAdapter;
 import com.kof.model.SubMainDataHolder;
-import com.kof.net.HotNewsUpdateTask;
+import com.kof.net.LoadingTask;
 
 public class SubFragmentMainHotnews extends SubFragmentMain {
 
@@ -44,6 +43,7 @@ public class SubFragmentMainHotnews extends SubFragmentMain {
 					@Override
 					public void onResponse(JSONObject response) {
 						JSONArray jsonArray;
+						
 						try {
 							jsonArray = response.getJSONArray("data");
 							for (int i = 0; i != jsonArray.length(); i++) {
@@ -52,6 +52,7 @@ public class SubFragmentMainHotnews extends SubFragmentMain {
 								dataHolder.addImage(jsonObject.getString("thumb"));
 								dataHolder.addTitle(jsonObject.getString("title"));
 								dataHolder.addDescription(jsonObject.getString("description"));
+								adapter.notifyDataSetChanged();
 							}
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
@@ -72,8 +73,8 @@ public class SubFragmentMainHotnews extends SubFragmentMain {
 			PullToRefreshListView listView) {
 		// TODO Auto-generated method stub
 		// return new LoadingTask(mPullToRefreshListView);
-		return new HotNewsUpdateTask(mPullToRefreshListView,
-				 dataHolder, adapter);
+		return new LoadingTask(mPullToRefreshListView,fatherActivity,"http://www.dongqiudi.com/archives/1?page=1",
+				  adapter,dataHolder);
 	}
 
 }

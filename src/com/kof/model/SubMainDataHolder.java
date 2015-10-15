@@ -34,4 +34,9 @@ public class SubMainDataHolder{
 	public void addImage(String url){
 		imageURLs.add(url);
 	}
+	public void clear(){
+		tListItems.clear();
+		sListItems.clear();
+		imageURLs.clear();
+	}
 }

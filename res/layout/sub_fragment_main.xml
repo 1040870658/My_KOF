@@ -14,7 +14,8 @@
         android:layout_height="match_parent"
         android:smoothScrollbar="true" 
         ptr:ptrDrawable="@drawable/default_ptr_flip"  
-        ptr:ptrAnimationStyle="flip" >
+        ptr:ptrAnimationStyle="flip"
+        ptr:ptrMode="both" >
     </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 </LinearLayout>

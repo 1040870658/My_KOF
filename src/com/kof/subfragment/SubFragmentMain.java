@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.kof.R;
@@ -43,7 +45,7 @@ public abstract class SubFragmentMain extends Fragment{
 		fatherActivity =getActivity();
 		this.layoutResource = R.layout.sub_fragment_main;
 		setUpDataHolder();
-		adapter = new SubMainAdapter(fatherActivity,dataHolder);
+	//	adapter = new SubMainAdapter(fatherActivity,dataHolder);
 		super.onCreate(savedInstanceState);
 	}
 	@Override
@@ -90,15 +92,20 @@ public abstract class SubFragmentMain extends Fragment{
 	protected void setUpPullToRefresh(View layout){
 		mPullToRefreshListView = (PullToRefreshListView) layout.findViewById(R.id.pull_refresh_list);
 		mPullToRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(generateUpdateLabel());
-		mPullToRefreshListView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
 		mPullToRefreshListView.getLoadingLayoutProxy().setReleaseLabel("松开立即刷新");
 		mPullToRefreshListView.getLoadingLayoutProxy().setRefreshingLabel("懂球帝正在刷新");
 		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
-
 			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				// TODO Auto-generated method stub
-				runRefreshTask(mPullToRefreshListView).execute();
+				if(refreshView.isShownHeader()){
+					mPullToRefreshListView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
+					runRefreshTask(mPullToRefreshListView).execute();
+				}
+				if(refreshView.isShownFooter()){
+					mPullToRefreshListView.getLoadingLayoutProxy().setPullLabel("上拉刷新");
+					runRefreshTask(mPullToRefreshListView).execute();
+				}
 			}
 		});
 //		adapter = new SubMainAdapter(new SubMainHolder(fatherActivity), fatherActivity, R.layout.item_list);
@@ -109,7 +116,7 @@ public abstract class SubFragmentMain extends Fragment{
 		this.layoutResource = resource;
 	}
 	protected  AsyncTask<Void, Void, String> runRefreshTask(PullToRefreshListView listView){
-		return new LoadingTask(mPullToRefreshListView);
+		return new LoadingTask(mPullToRefreshListView,fatherActivity,"http://www.dongqiudi.com/archives/1?page=1",adapter,dataHolder);
 	}
 		
 	protected abstract void setUpDataHolder();
