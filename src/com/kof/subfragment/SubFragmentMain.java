@@ -24,19 +24,25 @@ import com.kof.R;
 import com.kof.activity.CustomApplication;
 import com.kof.adapter.SubMainAdapter;
 import com.kof.model.SubMainDataHolder;
+import com.kof.net.LoadMoreTask;
 import com.kof.net.LoadingTask;
+import com.kof.utils.DataRefreshHandler;
 import com.kof.utils.DateManager;
 
 public abstract class SubFragmentMain extends Fragment{
 
 	protected PullToRefreshListView mPullToRefreshListView;
+	protected LoadingTask loadingTask;
+	protected LoadMoreTask loadMoreTask;
+	protected DataRefreshHandler dataRefreshHandler;
 	protected DateManager dateManager;
 	protected Activity fatherActivity;
 	protected SubMainAdapter adapter;
 	protected View layout;
 	protected SubMainDataHolder dataHolder;
 	protected int layoutResource;
-	protected int count = 0;
+	protected int count = 2;
+	protected String dataURL = "http://www.dongqiudi.com/archives/1?page=";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -99,12 +105,19 @@ public abstract class SubFragmentMain extends Fragment{
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				// TODO Auto-generated method stub
 				if(refreshView.isShownHeader()){
+					String url = dataURL+1;
 					mPullToRefreshListView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
-					runRefreshTask(mPullToRefreshListView).execute();
+					loadingTask = (LoadingTask) runRefreshTask(mPullToRefreshListView);
+					loadingTask.setURL(url);
+					loadingTask.execute();
 				}
 				if(refreshView.isShownFooter()){
-					mPullToRefreshListView.getLoadingLayoutProxy().setPullLabel("上拉刷新");
-					runRefreshTask(mPullToRefreshListView).execute();
+					String url = dataURL+count;
+					mPullToRefreshListView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
+					loadMoreTask = new LoadMoreTask(mPullToRefreshListView, fatherActivity, url, dataRefreshHandler, dataHolder);
+					loadMoreTask.setURL(url);
+					loadMoreTask.execute();
+					count++;
 				}
 			}
 		});
@@ -116,7 +129,7 @@ public abstract class SubFragmentMain extends Fragment{
 		this.layoutResource = resource;
 	}
 	protected  AsyncTask<Void, Void, String> runRefreshTask(PullToRefreshListView listView){
-		return new LoadingTask(mPullToRefreshListView,fatherActivity,"http://www.dongqiudi.com/archives/1?page=1",adapter,dataHolder);
+		return new LoadingTask(mPullToRefreshListView,fatherActivity,dataURL+1,dataRefreshHandler,dataHolder);
 	}
 		
 	protected abstract void setUpDataHolder();

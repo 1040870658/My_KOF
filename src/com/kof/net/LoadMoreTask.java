@@ -4,21 +4,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.util.Log;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.kof.adapter.SubMainAdapter;
 import com.kof.model.SubMainDataHolder;
 
-import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Handler;
-import android.util.Log;
-
-public class LoadingTask extends AsyncTask<Void, Void, String>{
+public class LoadMoreTask  extends AsyncTask<Void, Void, String>{
 
 	protected PullToRefreshListView mPullToRefreshListView;
 	private SubMainDataHolder dataHolder;
@@ -26,7 +25,7 @@ public class LoadingTask extends AsyncTask<Void, Void, String>{
 	private RequestQueue mQueue;
 	private Context context;
 	private String url;
-	public LoadingTask(PullToRefreshListView mPullToRefreshListView,Context context,String url,Handler handler,SubMainDataHolder dataHolder){
+	public LoadMoreTask(PullToRefreshListView mPullToRefreshListView,Context context,String url,Handler handler,SubMainDataHolder dataHolder){
 		super();
 		this.handler = handler;
 		this.dataHolder = dataHolder;
@@ -53,7 +52,6 @@ public class LoadingTask extends AsyncTask<Void, Void, String>{
 	}
 	private void RequestData(){
 		mQueue = Volley.newRequestQueue(context);
-		dataHolder.clear();
 		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
 				url, null,
 				new Response.Listener<JSONObject>() {
@@ -70,9 +68,9 @@ public class LoadingTask extends AsyncTask<Void, Void, String>{
 									dataHolder.addImage(jsonObject.getString("thumb"));
 									dataHolder.addTitle(jsonObject.getString("title"));
 									dataHolder.addDescription(jsonObject.getString("description"));
+									handler.sendEmptyMessage(0);
 								}
 							}
-							handler.sendEmptyMessage(0);
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

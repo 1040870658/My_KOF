@@ -7,6 +7,7 @@ import java.util.concurrent.CountDownLatch;
 import com.kof.R;
 import com.kof.adapter.FragmentViewPageAdapter;
 import com.kof.model.GlobalData;
+import com.kof.subfragment.EmptyFragment;
 import com.kof.subfragment.SubFragmentFA;
 import com.kof.subfragment.SubFragmentMain;
 import com.kof.subfragment.SubFragmentMainHotnews;
@@ -82,16 +83,16 @@ public class FragmentMain extends Fragment {
 			((TextView) indicatorView.findViewById(R.id.sub_text))
 					.setText(GlobalData.subMain[i]);
 			mTabHost.addTab(mTabHost.newTabSpec("sub_main_tab" + i)
-					.setIndicator(indicatorView), SubFragmentMainHotnews.class,
-					new Bundle());
+					.setIndicator(indicatorView), EmptyFragment.class,
+					null);
 		}
-	//	initViewPager(mTabHost);
+		initViewPager(mTabHost);
 		mTabHost.setOnTabChangedListener(new OnTabChangeListener() {
 			@Override
 			public void onTabChanged(String arg0) {
 				// TODO Auto-generated method stub
 				int currentTab = mTabHost.getCurrentTab();
-				//viewPager.setCurrentItem(currentTab);
+				viewPager.setCurrentItem(currentTab);
 				if (currentTab >= GlobalData.DISPLAY_NUM / 2) {
 					horizontalScrollView.smoothScrollTo(
 							(int) horizontalScrollView.getX()

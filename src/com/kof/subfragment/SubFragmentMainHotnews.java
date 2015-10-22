@@ -19,6 +19,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.kof.adapter.SubMainHotnewsAdapter;
 import com.kof.model.SubMainDataHolder;
 import com.kof.net.LoadingTask;
+import com.kof.utils.DataRefreshHandler;
 
 public class SubFragmentMainHotnews extends SubFragmentMain {
 
@@ -28,6 +29,7 @@ public class SubFragmentMainHotnews extends SubFragmentMain {
 			Bundle savedInstanceState) {
 		adapter = new SubMainHotnewsAdapter(getActivity(),
 				 dataHolder);
+		dataRefreshHandler = new DataRefreshHandler(adapter);
 		// CustomApplication.getRefWatcher(getActivity()).watch(this);
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
@@ -52,8 +54,8 @@ public class SubFragmentMainHotnews extends SubFragmentMain {
 								dataHolder.addImage(jsonObject.getString("thumb"));
 								dataHolder.addTitle(jsonObject.getString("title"));
 								dataHolder.addDescription(jsonObject.getString("description"));
-								adapter.notifyDataSetChanged();
 							}
+							adapter.notifyDataSetChanged();
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -74,7 +76,7 @@ public class SubFragmentMainHotnews extends SubFragmentMain {
 		// TODO Auto-generated method stub
 		// return new LoadingTask(mPullToRefreshListView);
 		return new LoadingTask(mPullToRefreshListView,fatherActivity,"http://www.dongqiudi.com/archives/1?page=1",
-				  adapter,dataHolder);
+				  dataRefreshHandler,dataHolder);
 	}
 
 }

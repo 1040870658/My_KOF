@@ -44,9 +44,7 @@ public class MainActivity extends FragmentActivity {
 	private RelativeLayout drawerSettings;
 	private FragmentTabHost mTabHost;
 	private Dialog splashDialog ;
-	private ArrayAdapter<String> arrayAdapter;
 	private ArrayList<String>individual_items;
-	private ActionBarDrawerToggle drawerbar;
 	private TextSettingAdapter textSettingAdapter;
 	
 	private void initTabHost(){
@@ -78,7 +76,6 @@ public class MainActivity extends FragmentActivity {
 		individual_items.add("给我们评分 ");
 		individual_items.add("语言");
 		individual_items.add("设置");
-		arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,individual_items);
 		textSettingAdapter = new TextSettingAdapter(individual_items, this);
 		drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
 		drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
