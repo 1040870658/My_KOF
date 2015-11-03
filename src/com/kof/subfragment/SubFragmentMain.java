@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,14 +14,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.kof.R;
-import com.kof.activity.CustomApplication;
+import com.kof.activity.NewsActivity;
 import com.kof.adapter.SubMainAdapter;
 import com.kof.model.SubMainDataHolder;
 import com.kof.net.LoadMoreTask;
@@ -34,6 +35,7 @@ public abstract class SubFragmentMain extends Fragment{
 	protected PullToRefreshListView mPullToRefreshListView;
 	protected LoadingTask loadingTask;
 	protected LoadMoreTask loadMoreTask;
+	private Intent intent;
 	protected DataRefreshHandler dataRefreshHandler;
 	protected DateManager dateManager;
 	protected Activity fatherActivity;
@@ -124,6 +126,20 @@ public abstract class SubFragmentMain extends Fragment{
 //		adapter = new SubMainAdapter(new SubMainHolder(fatherActivity), fatherActivity, R.layout.item_list);
 		ListView actualListView = mPullToRefreshListView.getRefreshableView();
 		actualListView.setAdapter(adapter);
+		actualListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				Bundle info = new Bundle();
+				Log.e("position", id+"");
+				info.putString("id", adapter.getDataHolder().getId().get((int)id));
+				intent = new Intent();
+				intent.putExtra("news", info);
+				intent.setClass(fatherActivity, NewsActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 	public void setLayoutResource(int resource){
 		this.layoutResource = resource;
@@ -176,6 +192,5 @@ public abstract class SubFragmentMain extends Fragment{
 		Log.e("onStop", this.getClass().getName());
 		super.onStop();
 	}
-	
 	
 }

@@ -19,10 +19,9 @@ public class CustomApplication extends Application{
 		// TODO Auto-generated method stub
 		ImageLoaderConfiguration configuration = new ImageLoaderConfiguration
 				.Builder(this)
-				.memoryCache(new LruMemoryCache(1024*1024))
-				.memoryCacheSize(1024*1024)
+				.memoryCache(new LruMemoryCache(10*1024))
 				.memoryCacheExtraOptions(48, 60)
-				.diskCacheSize((int) (Runtime.getRuntime().maxMemory()/4))
+				.diskCacheSize((int) (Runtime.getRuntime().maxMemory()/5))
 				.threadPoolSize(3)
 				.denyCacheImageMultipleSizesInMemory()
 				.build();

@@ -28,6 +28,9 @@
             </intent-filter>
         </activity>
       
+        <activity
+            android:name=".activity.NewsActivity"
+            android:label="news"/>
    		<service
             android:name="com.squareup.leakcanary.internal.HeapAnalyzerService"
             android:enabled="false"

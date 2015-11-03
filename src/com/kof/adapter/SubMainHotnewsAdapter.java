@@ -54,6 +54,12 @@ public class SubMainHotnewsAdapter extends SubMainAdapter {
 
 	
 	@Override
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
+		return position - 1;
+	}
+
+	@Override
 	public int getItemViewType(int position) {
 		// TODO Auto-generated method stub
 		if(0 == position){

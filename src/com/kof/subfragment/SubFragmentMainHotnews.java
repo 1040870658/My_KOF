@@ -54,6 +54,7 @@ public class SubFragmentMainHotnews extends SubFragmentMain {
 								dataHolder.addImage(jsonObject.getString("thumb"));
 								dataHolder.addTitle(jsonObject.getString("title"));
 								dataHolder.addDescription(jsonObject.getString("description"));
+								dataHolder.addId(jsonObject.getString("id"));
 							}
 							adapter.notifyDataSetChanged();
 						} catch (JSONException e) {

@@ -68,6 +68,7 @@ public class LoadMoreTask  extends AsyncTask<Void, Void, String>{
 									dataHolder.addImage(jsonObject.getString("thumb"));
 									dataHolder.addTitle(jsonObject.getString("title"));
 									dataHolder.addDescription(jsonObject.getString("description"));
+									dataHolder.addId(jsonObject.getString("id"));
 									handler.sendEmptyMessage(0);
 								}
 							}

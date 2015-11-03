@@ -37,7 +37,7 @@ public class SubMainAdapter extends BaseAdapter {
 	protected ListView mListView;
 	DisplayImageOptions options; 
 	protected ImageLoader auto_imageLoader;
-	protected SubMainDataHolder dataHolder ;;
+	protected SubMainDataHolder dataHolder ;
 	protected Activity activity;
 	private AbsListView.LayoutParams lp;
 	private RelativeLayout.LayoutParams params ;
@@ -137,5 +137,7 @@ public class SubMainAdapter extends BaseAdapter {
 			return resid;
 		}
 	}
-	
+	public SubMainDataHolder getDataHolder(){
+		return dataHolder;
+	}
 }

@@ -91,7 +91,6 @@ public class MainActivity extends FragmentActivity {
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		DisplayImageOptions options = new DisplayImageOptions.Builder()
 	    .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
-	    .cacheInMemory(true)
 	    .cacheOnDisk(true)
 	    .resetViewBeforeLoading(true)
 	    .displayer(new RoundedBitmapDisplayer(112)).build();
